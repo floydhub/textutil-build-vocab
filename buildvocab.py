@@ -2,6 +2,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import argparse
 import csv
 import distutils.util
+import numpy as np
 import re
 from tensorflow.contrib import learn
 
@@ -114,7 +115,8 @@ def main():
                 row_transformed = []
                 for idx, col in enumerate(row):
                     if idx in args.cols:
-                        row_transformed.append(lines_transformed[i])
+                        line = np.array2string(lines_transformed[i], max_line_width=np.inf) # convert the numpy.ndarray to string
+                        row_transformed.append(line)
                         i+=1
                     else:
                         row_transformed.append(col)
