@@ -115,7 +115,9 @@ def main():
                 row_transformed = []
                 for idx, col in enumerate(row):
                     if idx in args.cols:
-                        line = np.array2string(lines_transformed[i], max_line_width=np.inf) # convert the numpy.ndarray to string
+                        # line = np.array2string(lines_transformed[i], max_line_width=np.inf, separator=',') # convert the numpy.ndarray to string
+                        line_list = lines_transformed[i].tolist()
+                        line = ' '.join(map(str, line_list))
                         row_transformed.append(line)
                         i+=1
                     else:
