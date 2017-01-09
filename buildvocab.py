@@ -5,6 +5,18 @@ import distutils.util
 import re
 from tensorflow.contrib import learn
 
+def str2bool(val):
+    """
+    Helper method to convert string to bool
+    """
+    if val is None:
+        return False
+    val = val.lower().strip()
+    if val in ['true', 't', 'yes', 'y', '1', 'on']:
+        return True
+    elif val in ['false', 'f', 'no', 'n', '0', 'off']:
+        return False
+
 def main():
     """
     Learn a vocabulary dictionary of all tokens in the raw documents. Then convert text in 
@@ -25,7 +37,7 @@ def main():
         help='Max number of words in output sentences. Longer sentences are trimmed, shorter are padded')
     parser.add_argument('-f', '--minfreq', type=int, default=0, 
         help='Min frequency for word to be in vocabulary')
-    parser.add_argument('-header', '--hasheader', required=False, type=distutils.util.strtobool,
+    parser.add_argument('-header', '--hasheader', required=False, type=str2bool,
         default='False', help='File has header row?')
     parser.add_argument('-o', '--output', required=True, help='Path to output file')
     parser.add_argument('-ov', '--output_vocabmap', required=True, help='Path to vocab mapping output file')
